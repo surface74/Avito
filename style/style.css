@@ -33,7 +33,10 @@ ul {
   margin: 0;
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   padding: 0;
   margin: 0;
 }
@@ -205,7 +208,8 @@ button {
   margin-top: 15px;
   margin-left: auto;
 }
-.modal__btn-submit:disabled, .modal__btn-submit[disabled] {
+.modal__btn-submit:disabled,
+.modal__btn-submit[disabled] {
   background-color: #cccccc;
   color: #666666;
 }
@@ -214,7 +218,7 @@ button {
   align-items: center;
 }
 .modal__btn-warning {
-  color: #BF3F4A;
+  color: #bf3f4a;
 }
 .modal__content {
   display: flex;
@@ -242,7 +246,7 @@ button {
   cursor: pointer;
 }
 .modal__file-label:hover span {
-  background-color: #BF3F4A;
+  background-color: #bf3f4a;
 }
 .modal__close {
   position: absolute;
