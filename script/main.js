@@ -1,4 +1,5 @@
 'use strict';
+const JPEG_PREFIX = 'data:image/jpeg;base64';
 
 const dataBase = JSON.parse(localStorage.getItem('avito')) || [];
 
@@ -54,7 +55,7 @@ const renderCard = () => {
 
         catalog.insertAdjacentHTML('beforeend', `
             <li class="card" data-id="${index}">
-                <img class="card__image" src="data:image/jpeg;base64, ${item.image}" alt="test">
+                <img class="card__image" src="${JPEG_PREFIX}, ${item.image}" alt="test">
                 <div class="card__description">
                     <h3 class="card__header">${item.nameItem}</h3>
                     <div class="card__price">${item.costItem} ₽</div>
@@ -66,6 +67,7 @@ const renderCard = () => {
 };
 
 //ADD EVENT LISTENER
+
 modalFileInput.addEventListener('change', event => {
     const target = event.target;
 
@@ -79,10 +81,10 @@ modalFileInput.addEventListener('change', event => {
     reader.readAsBinaryString(file);
 
     reader.addEventListener('load', event => {
-        if (infoPhoto.size < 200000) {
+        if (infoPhoto.size < 400000) {
             modalFileBtn.textContent = infoPhoto.fileName;
             infoPhoto.base64 = btoa(event.target.result);
-            modalImageAdd.src = `data:image/jpeg;base64, ${infoPhoto.base64}`;
+            modalImageAdd.src = `${JPEG_PREFIX}, ${infoPhoto.base64}`;
         } else {
             modalFileBtn.textContent = 'Файл не больше 200кБ';
             modalFileInput.value = '';
@@ -116,9 +118,20 @@ btnAddAdv.addEventListener('click', () => {
 });
 
 //Open modal for a clicked card
-catalog.addEventListener('click', e => {
-    const target = e.target;
+catalog.addEventListener('click', event => {
+    const target = event.target;
     if (target.closest('.card')) {
+        const cardData = dataBase[target.closest('.card').dataset.id];
+        modalItem.querySelector('.modal__header-item').textContent = cardData.nameItem;
+        modalItem.querySelector('.modal__status-item').textContent = (cardData.status == 'old') ? 'б/у' : 'новый';
+        modalItem.querySelector('.modal__description-item').textContent = cardData.descriptionItem;
+        modalItem.querySelector('.modal__cost-item').textContent = `${cardData.costItem} ₽`;
+        modalItem.querySelector('.modal__image-item').src = `${JPEG_PREFIX}, ${cardData.image}`;
+        console.dir(modalItem.querySelector('.modal__header-item'));
+        console.log('cardData: ', cardData);
+
+
+
         modalItem.classList.remove('hide');
         document.addEventListener('keydown', closeModal);
     }
