@@ -128,6 +128,19 @@ button {
   border: 2px solid #ccc;
   border-right-width: 1px;
 }
+
+.search__reset {
+  position: relative;
+  top: -90%;
+  margin-left: 98%;
+  opacity: 15%;
+  transition: opacity 1s;
+}
+
+.search__reset:hover {
+  opacity: 100%;
+}
+
 .search__btn {
   border: 2px solid #ccc;
   border-left-width: 1px;
@@ -154,7 +167,7 @@ button {
   border: 1px solid #ccc;
   flex-grow: 1;
   object-fit: cover;
-  max-height: 260px;
+  height: 160px;
 }
 .card__description {
   padding: 15px;
